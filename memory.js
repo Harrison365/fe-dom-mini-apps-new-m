@@ -1,36 +1,39 @@
-let colorArray = ["yellow", "green", "#9EA3F5", "orange", "blue", "red"];
-let shuffledArray;
-
-let pairs = [
-  ["1", "7"],
-  ["2", "8"],
-  ["3", "9"],
-  ["4", "10"],
-  ["5", "11"],
-  ["6", "12"],
+let colorArray = [
+  "yellow",
+  "green",
+  "#9EA3F5",
+  "orange",
+  "blue",
+  "red",
+  "yellow",
+  "green",
+  "#9EA3F5",
+  "orange",
+  "blue",
+  "red",
 ];
+let shuffledArray = colorArray.sort(() => Math.random() - 0.5);
 
-let colors = {
-  1: "yellow",
-  2: "green",
-  3: "#9EA3F5",
-  4: "orange",
-  5: "blue",
-  6: "red",
-  7: "yellow",
-  8: "green",
-  9: "#9EA3F5",
-  10: "orange",
-  11: "blue",
-  12: "red",
+let pairs = {
+  yellow: [],
+  green: [],
+  "#9EA3F5": [],
+  orange: [],
+  blue: [],
+  red: [],
 };
 
+shuffledArray.forEach((color, index) => {
+  pairs[color].push(index);
+});
+
 let count = 0;
-let firstColor = "";
-let secondColor = "";
+let firstId = "";
+let secondId = "";
 let solvedSquares = [];
-let livesUsed = 0;
+let livesLeft = 5;
 let pairFound = false;
+let clickable = true;
 
 const card = document.getElementsByClassName("card");
 const cards = [...card];
@@ -38,44 +41,64 @@ const score = document.getElementById("score");
 
 cards.forEach((square) => {
   square.addEventListener("click", (event) => {
-    cardId = event.target.attributes[0].nodeValue;
-    square.style.backgroundColor = colors[cardId];
+    if (clickable) {
+      square.style.backgroundColor =
+        colorArray[event.target.attributes[0].nodeValue];
+    }
   });
+
   square.addEventListener("click", (event) => {
-    if (count === 0) {
-      cardId = event.target.attributes[0].nodeValue;
-      firstColor = cardId;
-      console.log(firstColor);
-      count++;
-    } else if (count === 1) {
-      cardId = event.target.attributes[0].nodeValue;
-      secondColor = cardId;
-      console.log(secondColor);
-      console.log(firstColor, secondColor);
-      pairs.forEach((pair) => {
-        if (pair.includes(firstColor) && pair.includes(secondColor)) {
-          pairFound = true;
-          console.log(true);
+    if (clickable) {
+      if (count === 0) {
+        firstId = event.target.attributes[0].nodeValue;
+        count++;
+      } else if (count === 1) {
+        secondId = event.target.attributes[0].nodeValue;
+
+        Object.keys(pairs).forEach((color) => {
+          if (
+            pairs[color].includes(+firstId) &&
+            pairs[color].includes(+secondId)
+          ) {
+            pairFound = true;
+          }
+        });
+        if (pairFound) {
+          count = 0;
+
+          solvedSquares.push(firstId, secondId);
+          const tag = document.createElement("p");
+          const contents = document.createTextNode("Well Done!!!");
+          tag.appendChild(contents);
+          const element = document.getElementById("score");
+          element.appendChild(tag);
+        } else {
+          clickable = false;
+
+          count = 0;
+          livesLeft--;
+          score.innerText = `Score = ${livesLeft}`;
+
+          const tag = document.createElement("p");
+          const contents = document.createTextNode("You Suck!!!");
+          tag.appendChild(contents);
+          const element = document.getElementById("score");
+          element.appendChild(tag);
+
+          setTimeout(() => {
+            clickable = true;
+
+            element.removeChild(tag);
+            cards.forEach((square) => {
+              let squareId = square.attributes[0].nodeValue;
+              if (!solvedSquares.includes(squareId)) {
+                square.style.backgroundColor = "grey";
+              }
+            });
+          }, 2000);
         }
-      });
-      if (pairFound) {
-        count = 0;
-        solvedSquares.push(firstColor, secondColor);
-        console.log(solvedSquares);
-        pairFound = false;
-      } else {
-        count = 0;
-        livesUsed++;
-        score.innerText = `Score = ${livesUsed}`;
-        setTimeout(() => {
-          cards.forEach((square) => {
-            let squareId = square.attributes[0].nodeValue;
-            if (!solvedSquares.includes(squareId)) {
-              square.style.backgroundColor = "grey";
-            }
-          });
-        }, 2000);
       }
     }
   });
+  // }
 });
