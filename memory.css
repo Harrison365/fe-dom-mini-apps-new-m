@@ -1,0 +1,14 @@
+.card {
+  border: 2px solid black;
+  width: 100px;
+  height: 100px;
+  /* margin-right: 10px;
+  margin-bottom: 10px; */
+  background-color: grey;
+}
+
+#grid {
+  display: grid;
+  grid-template-rows: 125px 125px 125px;
+  grid-template-columns: 125px 125px 125px 125px;
+}
