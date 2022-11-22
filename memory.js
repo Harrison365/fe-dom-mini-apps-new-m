@@ -43,7 +43,6 @@ const score = document.getElementById("score");
 cards.forEach((square) => {
   square.addEventListener("click", (event) => {
     if (clickable) {
-      console.log(event.target.attributes[0].nodeValue);
       square.style.backgroundColor =
         shuffledArray[event.target.attributes[0].nodeValue];
     }
