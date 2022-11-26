@@ -1,3 +1,17 @@
+body {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+button {
+  width: 15%;
+  margin: auto;
+}
+
 .card {
   border: 2px solid black;
   width: 100px;
@@ -5,10 +19,12 @@
   /* margin-right: 10px;
   margin-bottom: 10px; */
   background-color: grey;
+  border-radius: 5%;
 }
 
 #grid {
   display: grid;
   grid-template-rows: 125px 125px 125px;
   grid-template-columns: 125px 125px 125px 125px;
+  margin: auto;
 }
