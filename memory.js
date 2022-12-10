@@ -26,8 +26,7 @@ let pairs = {
 shuffledArray.forEach((color, index) => {
   pairs[color].push(index);
 });
-console.log(pairs);
-console.log(shuffledArray);
+console.log(shuffledArray); //cheat code
 let count = 0;
 let firstId = "";
 let secondId = "";
