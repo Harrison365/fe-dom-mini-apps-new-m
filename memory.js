@@ -1,13 +1,13 @@
 let colorArray = [
   "yellow",
   "green",
-  "#9EA3F5",
+  "fuchsia",
   "orange",
   "blue",
   "red",
   "yellow",
   "green",
-  "#9EA3F5",
+  "fuchsia",
   "orange",
   "blue",
   "red",
@@ -17,7 +17,7 @@ let shuffledArray = colorArray.sort(() => Math.random() - 0.5);
 let pairs = {
   yellow: [],
   green: [],
-  "#9EA3F5": [],
+  fuchsia: [],
   orange: [],
   blue: [],
   red: [],
@@ -101,7 +101,7 @@ cards.forEach((square) => {
               cards.forEach((square) => {
                 let squareId = square.attributes[0].nodeValue;
                 if (!solvedSquares.includes(squareId)) {
-                  square.style.backgroundColor = "grey";
+                  square.style.backgroundColor = "#92a8d1";
                 }
               });
               clickable = true;

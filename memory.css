@@ -5,6 +5,7 @@ body {
   flex-direction: column;
   justify-content: center;
   justify-items: center;
+  background-color: #034f84;
 }
 
 button {
@@ -18,7 +19,7 @@ button {
   height: 100px;
   /* margin-right: 10px;
   margin-bottom: 10px; */
-  background-color: grey;
+  background-color: #92a8d1;
   border-radius: 5%;
 }
 
@@ -27,4 +28,13 @@ button {
   grid-template-rows: 125px 125px 125px;
   grid-template-columns: 125px 125px 125px 125px;
   margin: auto;
+}
+
+h1 {
+  color: white;
+  font-family: sans-serif;
+}
+h2 {
+  color: white;
+  font-family: sans-serif;
 }
