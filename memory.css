@@ -1,11 +1,17 @@
 body {
+  margin: 0;
+  padding-top: 1cm;
   width: 100%;
+  height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  justify-items: center;
-  background-color: #034f84;
+  align-items: center;
+  background-image: url("./pencil.jpg");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 
 button {
@@ -19,21 +25,42 @@ button {
   height: 100px;
   background-color: #92a8d1;
   border-radius: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 #grid {
   display: grid;
   grid-template-rows: 125px 125px 125px;
   grid-template-columns: 125px 125px 125px 125px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 h1 {
-  color: white;
+  color: black;
   font-family: sans-serif;
-  margin: 5%;
+  margin-bottom: 5%;
+  text-align: center;
 }
+
 h2 {
-  color: white;
+  color: black;
   font-family: sans-serif;
+}
+
+@media only screen and (max-width: 500px) {
+  .card {
+    width: 70px;
+    height: 70px;
+  }
+  #grid {
+    grid-template-rows: 90px 90px 90px;
+    grid-template-columns: 90px 90px 90px 90px;
+  }
+}
+
+#padding {
+  height: 30%;
 }
