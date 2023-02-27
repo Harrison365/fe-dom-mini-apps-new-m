@@ -1,3 +1,4 @@
+//create colours
 let colorArray = [
   "yellow",
   "green",
@@ -12,8 +13,9 @@ let colorArray = [
   "blue",
   "red",
 ];
+//shuffle them
 let shuffledArray = colorArray.sort(() => Math.random() - 0.5);
-
+//create pairs
 let pairs = {
   yellow: [],
   green: [],
@@ -22,11 +24,13 @@ let pairs = {
   blue: [],
   red: [],
 };
-
+//populate pairs object
 shuffledArray.forEach((color, index) => {
   pairs[color].push(index);
 });
-console.log(shuffledArray); //cheat code
+//cheat code
+console.log(shuffledArray);
+//set variables
 let count = 0;
 let firstId = "";
 let secondId = "";
@@ -35,6 +39,7 @@ let livesLeft = 5;
 let pairFound = false;
 let clickable = true;
 
+//get cards and score elements
 const card = document.getElementsByClassName("card");
 const cards = [...card];
 const score = document.getElementById("score");
