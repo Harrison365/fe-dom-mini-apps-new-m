@@ -59,65 +59,67 @@ cards.forEach((square) => {
         firstId = event.target.attributes[0].nodeValue;
         count++;
       } else if (count === 1) {
-        secondId = event.target.attributes[0].nodeValue;
+        if (firstId !== event.target.attributes[0].nodeValue) {
+          secondId = event.target.attributes[0].nodeValue;
 
-        Object.keys(pairs).forEach((color) => {
-          if (
-            pairs[color].includes(+firstId) &&
-            pairs[color].includes(+secondId)
-          ) {
-            pairFound = true;
-          }
-        });
-        if (pairFound) {
-          count = 0;
-          solvedSquares.push(firstId, secondId);
-          if (solvedSquares.length === 12) {
+          Object.keys(pairs).forEach((color) => {
+            if (
+              pairs[color].includes(+firstId) &&
+              pairs[color].includes(+secondId)
+            ) {
+              pairFound = true;
+            }
+          });
+          if (pairFound) {
+            count = 0;
+            solvedSquares.push(firstId, secondId);
+            if (solvedSquares.length === 12) {
+              const tag = document.createElement("p");
+              const contents = document.createTextNode("You Win!!!");
+              tag.appendChild(contents);
+              const element = document.getElementById("score");
+              element.appendChild(tag);
+            }
             const tag = document.createElement("p");
-            const contents = document.createTextNode("You Win!!!");
-            tag.appendChild(contents);
-            const element = document.getElementById("score");
-            element.appendChild(tag);
-          }
-          const tag = document.createElement("p");
-          const contents = document.createTextNode("Well Done!!!");
-          tag.appendChild(contents);
-          const element = document.getElementById("score");
-          element.appendChild(tag);
-          setTimeout(() => {
-            element.removeChild(tag);
-          }, 1000);
-        } else {
-          clickable = false;
-          count = 0;
-          livesLeft--;
-          score.innerText = `Remaining Lives: ${livesLeft}`;
-          if (livesLeft > 0) {
-            const tag = document.createElement("p");
-            const contents = document.createTextNode("You suck!!!");
+            const contents = document.createTextNode("Well Done!!!");
             tag.appendChild(contents);
             const element = document.getElementById("score");
             element.appendChild(tag);
             setTimeout(() => {
               element.removeChild(tag);
             }, 1000);
-            setTimeout(() => {
-              cards.forEach((square) => {
-                let squareId = square.attributes[0].nodeValue;
-                if (!solvedSquares.includes(squareId)) {
-                  square.style.backgroundColor = "#92a8d1";
-                }
-              });
-              clickable = true;
-            }, 1000);
           } else {
-            const tag = document.createElement("p");
-            const contents = document.createTextNode(
-              "Out of Lives. Please try again."
-            );
-            tag.appendChild(contents);
-            const element = document.getElementById("score");
-            element.appendChild(tag);
+            clickable = false;
+            count = 0;
+            livesLeft--;
+            score.innerText = `Remaining Lives: ${livesLeft}`;
+            if (livesLeft > 0) {
+              const tag = document.createElement("p");
+              const contents = document.createTextNode("You suck!!!");
+              tag.appendChild(contents);
+              const element = document.getElementById("score");
+              element.appendChild(tag);
+              setTimeout(() => {
+                element.removeChild(tag);
+              }, 1000);
+              setTimeout(() => {
+                cards.forEach((square) => {
+                  let squareId = square.attributes[0].nodeValue;
+                  if (!solvedSquares.includes(squareId)) {
+                    square.style.backgroundColor = "#92a8d1";
+                  }
+                });
+                clickable = true;
+              }, 1000);
+            } else {
+              const tag = document.createElement("p");
+              const contents = document.createTextNode(
+                "Out of Lives. Please try again."
+              );
+              tag.appendChild(contents);
+              const element = document.getElementById("score");
+              element.appendChild(tag);
+            }
           }
         }
       }
